@@ -9,11 +9,12 @@ const {
   deleteblogpost,
   latest,
 } = require('../controllers/blogPost')
-router.post('/posts', createPost)
-router.get('/posts', getallpost)
-router.get('/posts/latest', latest)
-router.get('/posts/:id', getParticularBlogPost)
-router.put('/posts/:id', updatePost)
-router.delete('/posts/:id', deleteblogpost)
+const { verifyToken } = require('../utils/verifyToken')
+router.post('/posts', verifyToken, createPost)
+router.get('/posts', verifyToken, getallpost)
+router.get('/posts/latest', verifyToken, latest)
+router.get('/posts/:id', verifyToken, getParticularBlogPost)
+router.put('/posts/:id', verifyToken, updatePost)
+router.delete('/posts/:id', verifyToken, deleteblogpost)
 
 module.exports = router
